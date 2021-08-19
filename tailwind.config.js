@@ -22,6 +22,7 @@ module.exports = {
         'base': '15px',
         'lg': '17px',
         'xl': '20px',
+        '2xl': '24px',
       },
       width: {
         'almost-100': 'calc(100vw - 40px)',

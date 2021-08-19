@@ -33,7 +33,7 @@ function App() {
       <div className='font-sans text-navy text-base lg:bg-gradient-to-r lg:from-red lg:to-yellow'>
         <div className="hidden bg-lightgrey absolute w-screen h-100-px top-0 lg:block"></div>
         <div className="relative bg-white lg:grid lg:grid-cols-12 lg:container lg:xl lg:mx-auto">
-          <button className='lg:hidden' onClick={() => setOpenNavPanel(true)}>
+          <button className='absolute right-0 top-0 p-4 lg:hidden' onClick={() => setOpenNavPanel(true)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="30.226" height="17.156" viewBox="0 0 30.226 17.156">
               <g id="Group_13" data-name="Group 13" transform="translate(-1861.108 -27.344)">
                 <line id="Line_11" data-name="Line 11" x2="16.392" transform="translate(1861.108 43.5)" fill="none" stroke="#232a3b" strokeWidth="2" />
@@ -45,26 +45,23 @@ function App() {
           <div className='lg:col-start-2 lg:col-end-5'>
             <MainNav shouldOpen={openNavPanel} onClose={closeNavPanel} />
           </div>
-          <div className='lg:col-start-5 lg:col-end-10'>
+          <div className='lg:col-start-5 lg:col-end-12'>
             <Switch>
               {
                 mainSubSites.map((el, i) =>
                   <Route key={i} path={getPath(el.title)}>
-                    <SubSite title={el.title} />
+                    <SubSite title={el.title} icon={el.icon}/>
                   </Route>
                 )
               }
               {
                 secondarySubSites.map((el, i) =>
                   <Route key={i} path={getPath(el.title)}>
-                    <SubSite title={el.title} />
+                    <SubSite title={el.title} icon={el.icon}/>
                   </Route>
                 )
               }
             </Switch>
-          </div>
-          <div className='lg:col-start-10 lg:col-end-13'>
-            Pomoc
           </div>
         </div>
       </div>
