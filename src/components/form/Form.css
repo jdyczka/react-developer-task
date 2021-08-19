@@ -8,18 +8,6 @@
     --darkgrey: #A7B2C6;
 }
 
-form p {
-    font-size: 18px;
-    font-weight: 900;
-    margin: 15px 0;
-}
-
-fieldset {
-    border: 1px solid var(--grey);
-    border-radius: 5px;
-    margin: 20px 0;
-}
-
 input[type='number'] {
     padding: 10px 20px;
     background: none;
@@ -56,8 +44,8 @@ label input[type='checkbox']:checked+div:before {
     background: var(--yellow);
 }
 
-input[type='radio']:not(:last-child),
-input[type='checkbox']:not(:last-child) {
+label:not(:last-child) {
+    display: block;
     border-bottom: 1px solid var(--grey);
 }
 
@@ -75,13 +63,4 @@ input[type='submit'] {
 input[type='submit']:disabled {
     background: var(--grey);
     color: var(--darkgrey);
-}
-
-
-
-
-@media (max-width: 1023px) {
-    fieldset {
-        background: var(--lightgrey);
-    }
 }

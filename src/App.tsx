@@ -46,7 +46,7 @@ function App() {
           <div className='lg:col-start-2 lg:col-end-5'>
             <MainNav shouldOpen={openNavPanel} onClose={closeNavPanel} />
           </div>
-          <div className='lg:col-start-5 lg:col-end-12'>
+          <div className='lg:col-start-5 lg:col-end-13 lg:flex lg:flex-col'>
             <Switch>
               {
                 mainSubSites.map((el, i) => {
