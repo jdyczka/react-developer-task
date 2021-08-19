@@ -1,14 +1,26 @@
 import React from "react";
 import { mainSubSites, secondarySubSites, getPath } from '../subSites';
-import MainNavItem from "./MainNavItem";
-import SecondaryNavItem from "./SecondaryNavItem";
+import NavItem from "./NavItem";
 
-export default function NavPanel() {
+interface NavPanelProps {
+    shouldOpen: boolean;
+    onClose(shouldClose: boolean): void;
+}
+
+export default function NavPanel({shouldOpen, onClose}: NavPanelProps) {
+
+    const closePanel = () => onClose(true);
 
     return (
-        <div style={{width: 'calc(100vw - 40px)'}} className='fixed right-0 min-h-screen flex flex-col justify-between bg-lightgrey pl-8'>
+        <div 
+            style={{
+                width: 'calc(100vw - 40px)',
+                transition: 'all .3s',
+                transform: `translate(${shouldOpen ? 0 : '100%'})`,
+            }} 
+            className='fixed right-0 top-0 min-h-screen flex flex-col justify-between bg-lightgrey pl-8'>
             <div className='text-right'>
-                <button className='p-5'>
+                <button className='p-5' onClick={closePanel}>
                     <svg width="17.181" height="17.182" viewBox="0 0 17.181 17.182">
                         <g id="Group_375" data-name="Group 375" transform="translate(-183.5 -234.773)">
                             <path id="Path_658" data-name="Path 658" d="M5.78,365.779a.957.957,0,0,0,0,1.352L21.052,382.4a.955.955,0,1,0,1.35-1.352L7.129,365.779A.955.955,0,0,0,5.78,365.779Z" transform="translate(178 -130.726)" fillRule="evenodd" />
@@ -21,11 +33,15 @@ export default function NavPanel() {
             <ul className='flex-grow font-bold text-lg'>
                 {
                     mainSubSites.map((el, i) =>
-                        <MainNavItem
+                        <NavItem
                             key={i}
                             icon={el.icon}
                             title={el.title}
-                            path={getPath(el.title)} />
+                            path={getPath(el.title)}
+                            wrapperStyles='py-3 border-b border-grey flex items-center'
+                            iconStyles='w-5 text-center'
+                            linkStyles='inline px-7'
+                            handleClick={closePanel} />
                     )
                 }
             </ul>
@@ -47,11 +63,15 @@ export default function NavPanel() {
             <ul className='text-sm flex flex-wrap gap-x-8 gap-y-3 pr-8 py-5 md:py-0 md:text-lg md:font-bold'>
                 {
                     secondarySubSites.map((el, i) =>
-                        <SecondaryNavItem
+                        <NavItem
                             key={i}
                             icon={el.icon}
                             title={el.title}
-                            path={getPath(el.title)} />
+                            path={getPath(el.title)}
+                            wrapperStyles='flex md:py-3 md:border-b md:border-grey md:flex md:items-center'
+                            iconStyles='hidden md:block md:w-5 md:text-center'
+                            linkStyles='inline md:px-7'
+                            handleClick={closePanel} />
                     )
                 }
             </ul>
