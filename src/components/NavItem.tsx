@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { ReactElement } from "react";
 
 interface NavItemProps {
@@ -8,18 +8,20 @@ interface NavItemProps {
     path: string;
     wrapperStyles: string;
     iconStyles: string;
-    linkStyles: string;
+    textStyles: string;
     handleClick(): void;
 }
 
-export default function NavItem({icon, title, path, wrapperStyles, iconStyles, linkStyles, handleClick}: NavItemProps) {
+export default function NavItem({ icon, title, path, wrapperStyles, iconStyles, textStyles, handleClick }: NavItemProps) {
 
     return (
-        <li className={wrapperStyles}>
-            <div className={iconStyles}>
-                {icon}
-            </div>
-            <Link className={linkStyles} to={path} onClick={handleClick}>{title}</Link>
+        <li>
+            <NavLink className={wrapperStyles} to={path} onClick={handleClick} activeClassName='text-yellow'>
+                <div className={iconStyles}>
+                    {icon}
+                </div>
+                <div className={textStyles}>{title}</div>
+            </NavLink>
         </li>
     )
 }
