@@ -18,7 +18,7 @@ export default function NavPanel({shouldOpen, onClose}: NavPanelProps) {
                 transform: `translate(${!shouldOpen ? 0 : '-100%'})`,
                 left: '100%',
             }} 
-            className='w-almost-100 fixed top-0 min-h-screen flex flex-col justify-between bg-lightgrey pl-8 lg:static lg:w-auto lg:bg-transparent'>
+            className='z-10 w-almost-100 fixed top-0 min-h-screen flex flex-col justify-between bg-lightgrey pl-8 lg:static lg:w-auto lg:bg-transparent'>
             <div className='text-right lg:hidden'>
                 <button className='p-5' onClick={closePanel}>
                     <svg width="17.181" height="17.182" viewBox="0 0 17.181 17.182">

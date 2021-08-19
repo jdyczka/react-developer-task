@@ -4,6 +4,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import FormSubSite from './components/FormSubSite';
 import MainNav from './components/NavPanel';
 import SubSite from './components/SubSite';
 import { mainSubSites, secondarySubSites, getPath } from './subSites';
@@ -48,16 +49,21 @@ function App() {
           <div className='lg:col-start-5 lg:col-end-12'>
             <Switch>
               {
-                mainSubSites.map((el, i) =>
-                  <Route key={i} path={getPath(el.title)}>
-                    <SubSite title={el.title} icon={el.icon}/>
-                  </Route>
-                )
+                mainSubSites.map((el, i) => {
+                  if (i === 1) {
+                    return <FormSubSite key={i} title={el.title} icon={el.icon} />
+                  }
+                  return (
+                    <Route key={i} path={getPath(el.title)}>
+                      <SubSite title={el.title} icon={el.icon} />
+                    </Route>
+                  )
+                })
               }
               {
                 secondarySubSites.map((el, i) =>
                   <Route key={i} path={getPath(el.title)}>
-                    <SubSite title={el.title} icon={el.icon}/>
+                    <SubSite title={el.title} icon={el.icon} />
                   </Route>
                 )
               }

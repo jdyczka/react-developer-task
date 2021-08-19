@@ -1,0 +1,87 @@
+:root {
+    --navy: #0C2A60;
+    --yellow: #F4AF41;
+    --red: #EB562B;
+    --blue: #31AEF2;
+    --lightgrey: #F7F8FA;
+    --grey: #E7EBF4;
+    --darkgrey: #A7B2C6;
+}
+
+form p {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 15px 0;
+}
+
+fieldset {
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+input[type='number'] {
+    padding: 10px 20px;
+    background: none;
+    font-weight: 700;
+    width: 100%;
+}
+
+input[type='radio'], 
+input[type='checkbox'] {
+    display: none;
+}
+
+label input[type='radio']+div,
+label input[type='checkbox']+div {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+label input[type='radio']+div:before,
+label input[type='checkbox']+div:before {
+    content: '';
+    display: inline-block;
+    width: 29px;
+    height: 29px;
+    border: 1px solid var(--grey);
+    border-radius: 50%;
+    background: #fff;
+    margin-right: 15px;
+}
+
+label input[type='radio']:checked+div:before,
+label input[type='checkbox']:checked+div:before {
+    background: var(--yellow);
+}
+
+input[type='radio']:not(:last-child),
+input[type='checkbox']:not(:last-child) {
+    border-bottom: 1px solid var(--grey);
+}
+
+input[type='submit'] {
+    border: 1px solid var(--yellow);
+    border-radius: 26px;
+    height: 52px;
+    padding: 0 60px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 auto;
+    background: var(--yellow);
+}
+
+input[type='submit']:disabled {
+    background: var(--grey);
+    color: var(--darkgrey);
+}
+
+
+
+
+@media (max-width: 1023px) {
+    fieldset {
+        background: var(--lightgrey);
+    }
+}
