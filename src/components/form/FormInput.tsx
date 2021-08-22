@@ -1,4 +1,4 @@
-import React, { FormEvent, FormEventHandler, forwardRef } from "react";
+import React, { FormEventHandler, forwardRef } from "react";
 
 interface FormInputProps {
     onChange: FormEventHandler<HTMLInputElement>;

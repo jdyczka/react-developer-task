@@ -11,27 +11,32 @@ interface FormData {
     treated: boolean;
     ldlc: number;
     ldlcUnit: 'mg/dl' | 'mmol/l';
-    test: string;
 }
 
 export default function Form() {
+
     const {
         register,
         handleSubmit,
-        watch,
-        formState: { errors }
+        reset,
+        formState: { isValid }
     } = useForm<FormData>({
+        mode: 'onChange',
         defaultValues: {
-            ldlc: 250,
-            test: 'test'
-        }
+            ldlcUnit: 'mg/dl'
+        },
     });
 
-    const onSubmit = handleSubmit((data: any) => {
-        console.log(data, errors);
+    const onSubmit = handleSubmit(({ risk, treated, ldlc, ldlcUnit }: FormData) => {
+        console.log(risk, treated, ldlc, ldlcUnit)
+        let result = 100 * risk - (treated ? 40 : 0) - 0.1 * ldlc;
+        if (ldlcUnit === 'mmol/l') result /= 18;
+        alert( result < 0 
+            ? 'Leczenie niewymagane'
+            : `Możliwe leczenie: ${result.toFixed(2)} ${ldlcUnit}`
+        );
+        reset();
     });
-
-    console.log(watch('risk'))
 
     return (
         <form className='lg:flex lg:flex-col lg:flex lg:flex-col lg:flex-grow lg:justify-between' onSubmit={onSubmit}>
@@ -44,10 +49,10 @@ export default function Form() {
                     <p>Quisque sed lectus non lacus mattis tincidunt.</p>
                 </>)}>
                     <FieldSet>
-                        <RadioInput {...register('risk')} name='risk' text='Niskie' value='low' />
-                        <RadioInput {...register('risk')} name='risk' text='Umiarkowane' value='moderate' />
-                        <RadioInput {...register('risk')} name='risk' text='Wysokie' value='high' />
-                        <RadioInput {...register('risk')} name='risk' text='Bardzo wysokie' value='very-high' />
+                        <RadioInput {...register('risk', { required: true })} text='Niskie' value='1.05' />
+                        <RadioInput {...register('risk', { required: true })} text='Umiarkowane' value='0.95' />
+                        <RadioInput {...register('risk', { required: true })} text='Wysokie' value='0.7' />
+                        <RadioInput {...register('risk', { required: true })} text='Bardzo wysokie' value='0.5' />
                     </FieldSet>
                 </FormGridRow>
                 <FormGridRow>
@@ -63,7 +68,7 @@ export default function Form() {
                     <p>Wpisz aktualnego stężenia / prowadzony pacjent</p>
                 )}>
                     <FieldSet>
-                        <FormInput {...register('ldlc')} type='number'/>
+                        <FormInput {...register('ldlc', { required: true, min: 0 })} type='number'/>
                     </FieldSet>
                 </FormGridRow>
 
@@ -72,15 +77,15 @@ export default function Form() {
                 </FormGridRow>
                 <FormGridRow>
                     <FieldSet>
-                        <RadioInput {...register('ldlcUnit')} name='ldlc-unit' text='mg/dl' value='low' />
-                        <RadioInput {...register('ldlcUnit')} name='ldlc-unit' text='mmol/l' value='moderate' />
+                        <RadioInput {...register('ldlcUnit', { required: true })} text='mg/dl' value='mg/dl' />
+                        <RadioInput {...register('ldlcUnit', { required: true })} text='mmol/l' value='mmol/l' />
                     </FieldSet>
                 </FormGridRow>
             </div>
 
             <FormGridRow>
                 <div className="text-center bg-grey fixed bottom-0 inset-x-0 p-6 lg:static lg:bg-transparent">
-                    <input type="submit" value="Możliwe leczenie" />
+                    <input type="submit" value="Możliwe leczenie" disabled={!isValid} />
                 </div>
             </FormGridRow>
 

@@ -1,4 +1,4 @@
-import React, { FormEventHandler, ForwardedRef, forwardRef } from "react";
+import React, { FormEventHandler, forwardRef } from "react";
 
 interface RadioInputProps {
     onChange: FormEventHandler<HTMLInputElement>;
@@ -8,7 +8,7 @@ interface RadioInputProps {
     text: string;
 }
 
-const RadioInput = React.forwardRef<HTMLInputElement, RadioInputProps>(({ onChange, onBlur, name, value, text }, ref) => (
+const RadioInput = forwardRef<HTMLInputElement, RadioInputProps>(({ onChange, onBlur, name, value, text }, ref) => (
     <label>
         <input
             ref={ref}
