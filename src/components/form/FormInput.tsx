@@ -1,22 +1,24 @@
-import React from "react";
+import React, { FormEvent, FormEventHandler, forwardRef } from "react";
 
 interface FormInputProps {
-    text?: string;
-    value: string;
-    name?: string;
+    onChange: FormEventHandler<HTMLInputElement>;
+    onBlur: FormEventHandler<HTMLInputElement>;
+    name: string;
     type: string;
+    text?: string;
 }
 
-export default function FormInput({text, value, name, type}: FormInputProps) {
+const FormInput = forwardRef<HTMLInputElement,FormInputProps>(({ onChange, onBlur, name, type, text = ''}, ref) => (
+    <label>
+        <input
+            ref={ref}
+            onChange={onChange}
+            onBlur={onBlur}
+            name={name}
+            type={type}
+        />
+        <div>{text}</div>
+    </label>
+))
 
-    return (
-        <label>
-            <input 
-                type={type} 
-                value={value} 
-                name={name || ''}
-                />
-            <div>{text}</div>
-        </label>
-    )
-}
+export default FormInput;

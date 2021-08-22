@@ -1,15 +1,25 @@
-import React from "react";
-import FormInput from "./FormInput";
+import React, { FormEventHandler, ForwardedRef, forwardRef } from "react";
 
 interface RadioInputProps {
-    text: string;
-    value: string;
+    onChange: FormEventHandler<HTMLInputElement>;
+    onBlur: FormEventHandler<HTMLInputElement>;
     name: string;
+    value: string;
+    text: string;
 }
 
-export default function RadioInput({text, value, name}: RadioInputProps) {
+const RadioInput = React.forwardRef<HTMLInputElement, RadioInputProps>(({ onChange, onBlur, name, value, text }, ref) => (
+    <label>
+        <input
+            ref={ref}
+            onChange={onChange}
+            onBlur={onBlur}
+            name={name}
+            type='radio'
+            value={value}
+        />
+        <div>{text}</div>
+    </label>
+));
 
-    return (
-        <FormInput type='radio' name={name} text={text} value={value} />
-    )
-}
+export default RadioInput;
