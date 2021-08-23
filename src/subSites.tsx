@@ -1,5 +1,3 @@
-import { JsxElement, JsxExpression } from "typescript";
-
 interface SubSiteData {
     title: string;
     icon?: JSX.Element;
