@@ -49,22 +49,15 @@ function App() {
           <div className='lg:col-start-5 lg:col-end-13 lg:flex lg:flex-col'>
             <Switch>
               {
-                mainSubSites.map((el, i) => {
-                  if (i === 1) {
-                    return <FormSubSite key={i} title={el.title} icon={el.icon} />
-                  }
-                  return (
+                mainSubSites.concat(secondarySubSites).map((el, i) => (
                     <Route key={i} path={getPath(el.title)}>
-                      <SubSite title={el.title} icon={el.icon} />
+                      {
+                        (i === 1)
+                          ? <FormSubSite title={el.title} icon={el.icon} />
+                          : <SubSite title={el.title} icon={el.icon} />
+                      }
                     </Route>
                   )
-                })
-              }
-              {
-                secondarySubSites.map((el, i) =>
-                  <Route key={i} path={getPath(el.title)}>
-                    <SubSite title={el.title} icon={el.icon} />
-                  </Route>
                 )
               }
             </Switch>

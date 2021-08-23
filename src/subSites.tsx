@@ -1,4 +1,12 @@
-const mainSubSites = [
+import { JsxElement, JsxExpression } from "typescript";
+
+interface SubSiteData {
+    title: string;
+    icon?: JSX.Element;
+    customStyles?: string;
+}
+
+const mainSubSites: SubSiteData[] = [
     {
         title: 'Ryzyko sercowo-naczyniowe',
         icon: <svg className='fill-current' width="19.855" height="18.614" viewBox="0 0 19.855 18.614">
@@ -77,7 +85,7 @@ const mainSubSites = [
     },
 ]
 
-const secondarySubSites = [
+const secondarySubSites: SubSiteData[] = [
     {
         title: 'Kontakt',
         icon: <svg className='fill-current' width="16.242" height="16.654" viewBox="0 0 16.242 16.654">
