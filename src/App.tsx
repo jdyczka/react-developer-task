@@ -17,8 +17,8 @@ function App() {
   useEffect(() => {
 
     function handleResize() {
-      const isMobile = !window.matchMedia('(min-width: 768px)').matches;
-      if (!isMobile) setOpenNavPanel(false);
+      const isMobile = !window.matchMedia('(min-width: 1024px)').matches;
+      if (!isMobile) closeNavPanel();
     }
 
     window.addEventListener('resize', handleResize);
