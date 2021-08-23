@@ -5,29 +5,27 @@ import {
   Route
 } from "react-router-dom";
 import FormSubSite from './components/FormSubSite';
-import MainNav from './components/NavPanel';
+import NavPanel from './components/NavPanel';
 import SubSite from './components/SubSite';
 import { mainSubSites, secondarySubSites, getPath } from './subSites';
 
 function App() {
 
-  useEffect(() => {
-    window.addEventListener('resize', checkIfMobile);
-    checkIfMobile();
-    closeNavPanel();
-    return () => {
-      window.removeEventListener('resize', checkIfMobile);
-    };
-  }, [window]);
-
-  const [isMobile, setIsMobile] = useState(false);
   const [openNavPanel, setOpenNavPanel] = useState(false);
+  const closeNavPanel = () =>  setOpenNavPanel(false);
 
-  const checkIfMobile = () => setIsMobile(!window.matchMedia('min-width: 768px').matches);
+  useEffect(() => {
 
-  const closeNavPanel = () => {
-    if (isMobile) setOpenNavPanel(false);
-  }
+    function handleResize() {
+      const isMobile = !window.matchMedia('(min-width: 768px)').matches;
+      if (!isMobile) setOpenNavPanel(false);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <Router>
@@ -44,7 +42,7 @@ function App() {
             </svg>
           </button>
           <div className='lg:col-start-2 lg:col-end-5'>
-            <MainNav shouldOpen={openNavPanel} onClose={closeNavPanel} />
+            <NavPanel shouldOpen={openNavPanel} onClose={closeNavPanel} />
           </div>
           <div className='lg:col-start-5 lg:col-end-13 lg:flex lg:flex-col'>
             <Switch>
